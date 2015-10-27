@@ -12,14 +12,7 @@ public class UserServiceTest {
 	@Test
 	public void testAdd() throws Exception {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");
-		
-		
 		UserService service = (UserService)ctx.getBean("userService");
-		
 		System.out.println(service.getUserDAO());
-		
-		
-		
 	}
-
 }
