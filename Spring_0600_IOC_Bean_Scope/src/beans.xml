@@ -7,7 +7,7 @@
   <bean name="u" class="com.bjsxt.dao.impl.UserDAOImpl">
   </bean>
 	
-  <bean id="userService" class="com.bjsxt.service.UserService" scope="prototype">
+  <bean id="userService" class="com.bjsxt.service.UserService" scope="singleton">
   	<!-- 
   	<property name="userDAO" ref="u" />
   	 -->
