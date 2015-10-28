@@ -19,6 +19,7 @@ public class LogInterceptor implements InvocationHandler {
 		System.out.println(m.getName() + " start");
 	}
 
+	@Override
 	public Object invoke(Object proxy, Method m, Object[] args)
 			throws Throwable {
 		beforeMethod(m);
