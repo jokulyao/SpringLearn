@@ -12,17 +12,30 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.bjsxt"/>
 
+	<!-- 定义代理类 -->
+	<!-- 第一种写法
 	<bean id="logInterceptor" class="com.bjsxt.aop.LogInterceptor"></bean>
 	<aop:config>
-		
 		<aop:aspect id="logAspect" ref="logInterceptor">
 			<aop:before method="before" pointcut="execution(public * com.bjsxt.service..*.add(..))" />
 		</aop:aspect>
-		
-
 	</aop:config>
-
-
-
-
+	 -->
+	 
+	 
+	<!-- 另一种写法（建议使用） -->
+	<bean id="logInterceptor" class="com.bjsxt.aop.LogInterceptor"></bean>
+	<aop:config>
+		<!-- 定义切入点（就是在哪些类的哪些方法上切入） -->
+		<aop:pointcut expression="execution(public * com.bjsxt.service..*.add(..))" id="businessService"/>
+		<!-- 定义切面类 （就是需要加入的切面逻辑）-->
+		<!-- 这段配置的意思是：在执行到切入点时，插入配置的切面类logInterceptor的before方法或者aroundMethod方法（根据配置不同而已） -->
+		<aop:aspect id="logAspect2" ref="logInterceptor">
+			<aop:around method="aroundMethod" pointcut-ref="businessService" />
+		</aop:aspect>
+		<aop:aspect id="logAspect" ref="logInterceptor">
+			<aop:before method="before" pointcut-ref="businessService" />
+		</aop:aspect>
+	</aop:config>
+	
 </beans>
